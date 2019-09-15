@@ -12,9 +12,10 @@ def create_dir(base_dir: str, target: str) -> str:
 BASE_DIR = abspath(dirname(__file__))
 
 BASE_TEMPLATE = 'base.html'
+STATIC_DIR = join(BASE_DIR, 'static')
 
 SOURCE_DIR = create_dir(BASE_DIR, 'source')
-SOURCE_DIR_IGNORE = ('.git',)
+SOURCE_DIR_IGNORE = ('.git', '.gitignore')
 RESULT_DIR = create_dir(BASE_DIR, 'result_dir')
 
 KNOWLEDGE_BASE_REPO_URL = 'git@gitlab.com:alex925/knowledge-base.git'
