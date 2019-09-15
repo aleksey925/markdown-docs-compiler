@@ -3,10 +3,6 @@ body {
   overflow-x: hidden; /* Prevent scroll on narrow devices */
 }
 
-body {
-  padding-top: 70px;
-}
-
 footer {
   padding: 30px 0;
 }
@@ -30,4 +26,15 @@ footer {
 
 #contact-block img {
   margin-left: 1em;
+}
+
+/*
+  Правила подстветки цитат
+ */
+blockquote {
+    color: #7f8fa4;
+    font-size: inherit;
+    padding: 8px 24px;
+    margin: 16px 0;
+    border-left: 3px solid #eaeaea;
 }

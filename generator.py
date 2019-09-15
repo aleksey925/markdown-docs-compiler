@@ -8,8 +8,9 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 
 from config import (
-    BASE_TEMPLATE, RESULT_DIR, KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR,
-    SOURCE_DIR_IGNORE, STATIC_DIR
+    BASE_KNOWLEDGE_BASE_TEMPLATE, RESULT_KNOWLEDGE_BASE_DIR,
+    KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR, SOURCE_DIR_IGNORE, STATIC_DIR,
+    RESULT_ROOT_DIR
 )
 
 
@@ -97,8 +98,10 @@ def rename_filename_in_links(result_dir):
 jinja_environment = Environment(
     loader=FileSystemLoader('templates'),
 )
-base_template = jinja_environment.get_template(BASE_TEMPLATE)
-css = open(join(STATIC_DIR, 'css', 'base.css')).read()
+base_knowledge_base_template = jinja_environment.get_template(
+    BASE_KNOWLEDGE_BASE_TEMPLATE
+)
+css = open(join(STATIC_DIR, 'css', 'blog.css')).read()
 
 md_extension_configs = {
     'pymdownx.highlight': {
@@ -114,8 +117,14 @@ except Exception:
     print('Возникла ошибка во время извлечения реппозитрия')
     exit(1)
 
-copy_source(SOURCE_DIR, RESULT_DIR)
+copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
 convert_md_files(
-    RESULT_DIR, base_template, css, md_extension_configs
+    RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template, css,
+    md_extension_configs
 )
-rename_filename_in_links(RESULT_DIR)
+rename_filename_in_links(RESULT_KNOWLEDGE_BASE_DIR)
+
+with open(join(RESULT_ROOT_DIR, 'index.html'), 'w') as out:
+    out.write(
+        jinja_environment.get_template('index.html').render(css=css)
+    )
