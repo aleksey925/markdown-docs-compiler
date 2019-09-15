@@ -13,16 +13,25 @@ from config import (
 )
 
 
+class GitProgress(git.remote.RemoteProgress):
+    def update(self, op_code, cur_count, max_count=None, message=''):
+        made = round(cur_count / max_count * 100)
+        print('\r[{:<25}] {}%'.format('#' * round(made / 4), made), end='')
+
+
 def pull_repo(repo_url, source_dir: str, pull_error: bool = False):
     if pull_error:
         shutil.rmtree(source_dir, ignore_errors=True)
 
     if exists(source_dir) and len(os.listdir(source_dir)) == 0:
-        git.Repo.clone_from(repo_url, source_dir)
+        print('Клонирование реппозитория:')
+        git.Repo.clone_from(repo_url, source_dir, progress=GitProgress())
+        print()
     else:
         try:
+            print('Извлечение изменений реппозитория:')
             git_repo = git.Repo(source_dir)
-            git_repo.remotes.origin.pull()
+            git_repo.remotes.origin.pull(progress=GitProgress())
         except Exception:
             pull_repo(repo_url, source_dir, True)
 
