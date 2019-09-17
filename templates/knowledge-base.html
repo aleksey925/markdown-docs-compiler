@@ -4,6 +4,10 @@
     <title>Записки питониста - Главная</title>
 {% endblock %}
 
+{% block head %}
+    <link rel="stylesheet" href="{{ STATIC_FILE_PREFIX_PATH }}static/css/knowledge-base.css">
+{% endblock %}
+
 {% block navbar %}
     <li><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
     <li class="active"><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>

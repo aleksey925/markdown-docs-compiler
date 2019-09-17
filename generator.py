@@ -57,7 +57,7 @@ def copy_source(source_dir, result_dir):
             shutil.copy(join(source_dir, i), join(result_dir, i))
 
 
-def convert_md_files(result_dir, template, css, extension_configs):
+def convert_md_files(result_dir, template, extension_configs):
     for root, dirs, files in os.walk(result_dir):
         for source_file in filter(lambda i: i.endswith('.md'), files):
             source_file_path = join(root, source_file)
@@ -73,7 +73,7 @@ def convert_md_files(result_dir, template, css, extension_configs):
                     extensions=['pymdownx.superfences', 'pymdownx.highlight'],
                     extension_configs=extension_configs
                 )
-                out.write(template.render(data=html, css=css))
+                out.write(template.render(data=html))
 
 
 def rename_filename_in_links(result_dir):
@@ -100,7 +100,6 @@ jinja_environment.globals['STATIC_FILE_PREFIX_PATH'] = STATIC_FILE_PREFIX_PATH
 base_knowledge_base_template = jinja_environment.get_template(
     BASE_KNOWLEDGE_BASE_TEMPLATE
 )
-css = open(join(STATIC_DIR, 'css', 'blog.css')).read()
 
 md_extension_configs = {
     'pymdownx.highlight': {
@@ -119,14 +118,14 @@ except Exception:
 clear_dir(RESULT_ROOT_DIR)
 copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
 convert_md_files(
-    RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template, css,
+    RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template,
     md_extension_configs
 )
 rename_filename_in_links(RESULT_KNOWLEDGE_BASE_DIR)
 
 with open(join(RESULT_ROOT_DIR, 'index.html'), 'w') as out:
     out.write(
-        jinja_environment.get_template('index.html').render(css=css)
+        jinja_environment.get_template('index.html').render()
     )
 
-shutil.copytree(STATIC_DIR, join(RESULT_ROOT_DIR, split(STATIC_DIR)[1]), )
+shutil.copytree(STATIC_DIR, join(RESULT_ROOT_DIR, split(STATIC_DIR)[1]))
