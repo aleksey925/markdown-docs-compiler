@@ -57,7 +57,7 @@ def copy_source(source_dir, result_dir):
             shutil.copy(join(source_dir, i), join(result_dir, i))
 
 
-def convert_md_files(result_dir, template, extension_configs):
+def convert_md_files(result_dir, template, extensions, extension_configs):
     for root, dirs, files in os.walk(result_dir):
         for source_file in filter(lambda i: i.endswith('.md'), files):
             source_file_path = join(root, source_file)
@@ -70,7 +70,7 @@ def convert_md_files(result_dir, template, extension_configs):
             with open(result_file_path, 'w') as out:
                 html = markdown.markdown(
                     markdown_str,
-                    extensions=['pymdownx.superfences', 'pymdownx.highlight'],
+                    extensions=extensions,
                     extension_configs=extension_configs
                 )
                 out.write(template.render(data=html))
@@ -101,6 +101,11 @@ base_knowledge_base_template = jinja_environment.get_template(
     BASE_KNOWLEDGE_BASE_TEMPLATE
 )
 
+md_extensions = [
+    'pymdownx.superfences',
+    'pymdownx.highlight',
+    'tables',
+]
 md_extension_configs = {
     'pymdownx.highlight': {
         'use_pygments': True,
@@ -119,7 +124,7 @@ clear_dir(RESULT_ROOT_DIR)
 copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
 convert_md_files(
     RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template,
-    md_extension_configs
+    md_extensions, md_extension_configs
 )
 rename_filename_in_links(RESULT_KNOWLEDGE_BASE_DIR)
 
