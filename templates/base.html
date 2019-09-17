@@ -28,13 +28,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html">Записки питониста</a>
+            <a class="navbar-brand" href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Записки питониста</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 {% block navbar %}
-                    <li><a href="index.html">Главная</a></li>
-                    <li><a href="knowledge_base/index.html">База знаний</a></li>
+                    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
+                    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>
                 {% endblock %}
             </ul>
         </div><!-- /.nav-collapse -->

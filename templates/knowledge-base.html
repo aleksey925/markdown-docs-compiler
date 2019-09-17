@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block navbar %}
-    <li><a href="index.html">Главная</a></li>
-    <li class="active"><a href="knowledge_base/index.html">База знаний</a></li>
+    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
+    <li class="active"><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>
 {% endblock %}
 
 {% block container %}

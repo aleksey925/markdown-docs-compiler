@@ -1,7 +1,7 @@
 import os
 import re
 import shutil
-from os.path import join, exists, isdir
+from os.path import join, exists, isdir, split
 
 import git
 import markdown
@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from config import (
     BASE_KNOWLEDGE_BASE_TEMPLATE, RESULT_KNOWLEDGE_BASE_DIR,
     KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR, SOURCE_DIR_IGNORE, STATIC_DIR,
-    RESULT_ROOT_DIR
+    RESULT_ROOT_DIR, STATIC_FILE_PREFIX_PATH
 )
 
 
@@ -47,8 +47,6 @@ def clear_dir(path: str):
 
 
 def copy_source(source_dir, result_dir):
-    clear_dir(result_dir)
-
     for i in os.listdir(source_dir):
         if i in SOURCE_DIR_IGNORE:
             continue
@@ -98,6 +96,7 @@ def rename_filename_in_links(result_dir):
 jinja_environment = Environment(
     loader=FileSystemLoader('templates'),
 )
+jinja_environment.globals['STATIC_FILE_PREFIX_PATH'] = STATIC_FILE_PREFIX_PATH
 base_knowledge_base_template = jinja_environment.get_template(
     BASE_KNOWLEDGE_BASE_TEMPLATE
 )
@@ -117,6 +116,7 @@ except Exception:
     print('Возникла ошибка во время извлечения реппозитрия')
     exit(1)
 
+clear_dir(RESULT_ROOT_DIR)
 copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
 convert_md_files(
     RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template, css,
@@ -128,3 +128,5 @@ with open(join(RESULT_ROOT_DIR, 'index.html'), 'w') as out:
     out.write(
         jinja_environment.get_template('index.html').render(css=css)
     )
+
+shutil.copytree(STATIC_DIR, join(RESULT_ROOT_DIR, split(STATIC_DIR)[1]), )

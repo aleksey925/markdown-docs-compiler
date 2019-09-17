@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block navbar %}
-    <li class="active"><a href="index.html">Главная</a></li>
-    <li><a href="knowledge_base/index.html">База знаний</a></li>
+    <li class="active"><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
+    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>
 {% endblock %}
 
 {% block container %}
@@ -19,7 +19,7 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="../static/images/avatar.png" width="100%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/avatar.png" width="100%">
                     </div>
                     <div class="col-sm-8">
                         <h1>Привет всем!</h1>
@@ -41,19 +41,19 @@
                 <div class="col-sm-12 text-center" id="contact-block">
                     <h2>Контакты</h2>
                     <a href="mailto:petrunnik.a@mail.ru">
-                        <img src="../static/images/email.png" width="5%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/email.png" width="5%">
                     </a>
                     <a href="skype:alex85244">
-                        <img src="../static/images/skype.png" width="5%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/skype.png" width="5%">
                     </a>
                     <a href="https://www.linkedin.com/in/aleksey-petrunnik-5313a9126/">
-                        <img src="../static/images/linkedin.png" width="5%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/linkedin.png" width="5%">
                     </a>
                     <a href="https://github.com/aleksey925/">
-                        <img src="../static/images/github.png" width="5%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/github.png" width="5%">
                     </a>
                     <a href="https://bitbucket.org/alex925/">
-                        <img src="../static/images/bitbucket.png" width="6%">
+                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/bitbucket.png" width="6%">
                     </a>
                 </div>
             </div>
