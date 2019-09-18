@@ -86,7 +86,7 @@ def rename_filename_in_links(result_dir):
 
             with open(file_path, 'w') as f:
                 f.write(re.sub(
-                    '(<a href=\".*\.)(md)(\">)',
+                    '(<a href=\".*\.)(md)((#.*)?\">)',
                     r'\g<1>html\g<3>',
                     file_data,
                     flags=re.UNICODE | re.MULTILINE
