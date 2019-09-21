@@ -34,7 +34,7 @@ def pull_repo(repo_url, source_dir: str, pull_error: bool = False):
             git_repo.remotes.origin.pull(progress=GitProgress())
             print()
         except Exception:
-            print('Возникла ошибка при попытке выполнить git pull')
+            print('\n', 'Возникла ошибка при попытке выполнить git pull')
             clear_dir(source_dir)
             pull_repo(repo_url, source_dir, True)
 
