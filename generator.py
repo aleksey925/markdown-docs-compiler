@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from config import (
     BASE_KNOWLEDGE_BASE_TEMPLATE, RESULT_KNOWLEDGE_BASE_DIR,
     KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR, SOURCE_DIR_IGNORE, STATIC_DIR,
-    RESULT_ROOT_DIR, STATIC_FILE_PREFIX_PATH
+    RESULT_ROOT_DIR, STATIC_FILE_PREFIX_PATH, IS_CI
 )
 
 
@@ -119,11 +119,12 @@ md_extension_configs = {
     },
 }
 
-try:
-    pull_repo(KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR)
-except Exception:
-    print('Возникла ошибка во время извлечения реппозитрия')
-    exit(1)
+if not IS_CI:
+    try:
+        pull_repo(KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR)
+    except Exception:
+        print('Возникла ошибка во время извлечения реппозитрия')
+        exit(1)
 
 clear_dir(RESULT_ROOT_DIR)
 copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
