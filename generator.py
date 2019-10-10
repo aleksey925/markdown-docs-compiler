@@ -10,7 +10,7 @@ from jinja2 import Environment, FileSystemLoader
 from config import (
     BASE_KNOWLEDGE_BASE_TEMPLATE, RESULT_KNOWLEDGE_BASE_DIR,
     KNOWLEDGE_BASE_REPO_URL, SOURCE_DIR, SOURCE_DIR_IGNORE, STATIC_DIR,
-    RESULT_ROOT_DIR, STATIC_FILE_PREFIX_PATH, IS_CI
+    RESULT_ROOT_DIR, STATIC_FILE_PREFIX_PATH, IS_CI, JINJA_TEMPLATE_DIR
 )
 
 
@@ -42,6 +42,18 @@ def pull_repo(repo_url, source_dir: str, pull_error: bool = False):
     print('Извлечение изменений завершено')
 
 
+class CopyTreeRootFilter:
+    def __init__(self, list_ignore_files):
+        self.is_root = True
+        self.list_ignore_files = list_ignore_files
+
+    def __call__(self, src, files):
+        if self.is_root:
+            self.is_root = False
+            return self.list_ignore_files
+        return []
+
+
 def clear_dir(path: str):
     for i in os.listdir(path):
         cur = join(path, i)
@@ -49,17 +61,6 @@ def clear_dir(path: str):
             shutil.rmtree(cur, ignore_errors=True)
         else:
             os.remove(cur)
-
-
-def copy_source(source_dir, result_dir):
-    for i in os.listdir(source_dir):
-        if i in SOURCE_DIR_IGNORE:
-            continue
-
-        if isdir(join(source_dir, i)):
-            shutil.copytree(join(source_dir, i), join(result_dir, i))
-        else:
-            shutil.copy(join(source_dir, i), join(result_dir, i))
 
 
 def convert_md_files(result_dir, template, extensions, extension_configs):
@@ -99,7 +100,7 @@ def rename_filename_in_links(result_dir):
 
 
 jinja_environment = Environment(
-    loader=FileSystemLoader('templates'),
+    loader=FileSystemLoader(JINJA_TEMPLATE_DIR),
 )
 jinja_environment.globals['STATIC_FILE_PREFIX_PATH'] = STATIC_FILE_PREFIX_PATH
 base_knowledge_base_template = jinja_environment.get_template(
@@ -127,7 +128,11 @@ if not IS_CI:
         exit(1)
 
 clear_dir(RESULT_ROOT_DIR)
-copy_source(SOURCE_DIR, RESULT_KNOWLEDGE_BASE_DIR)
+shutil.copytree(
+    SOURCE_DIR,
+    RESULT_KNOWLEDGE_BASE_DIR,
+    ignore=CopyTreeRootFilter(SOURCE_DIR_IGNORE)
+)
 convert_md_files(
     RESULT_KNOWLEDGE_BASE_DIR, base_knowledge_base_template,
     md_extensions, md_extension_configs
