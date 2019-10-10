@@ -1,9 +1,9 @@
 # Скрипт для автоматической генерации базы знаний и заливки ее на gitbub
-result_dir=`pwd`/result_dir/
 MODE=prod
 export MODE
+RESULT_DIR=`pwd`/result_dir/
 python3 ./generator.py
-cd $result_dir
+cd $RESULT_DIR
 git init
 git add .
 git commit -m 'init'
