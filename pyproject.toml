@@ -6,11 +6,11 @@ authors = ["Aleksey Petrunnik"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-markdown = "^3.1"
+markdown = "^3.2"
 pygments = "^2.4"
-pymdown-extensions = "^6.1"
+pymdown-extensions = "^7.1"
 jinja2 = "^2.10"
-gitpython = "^3.0"
+gitpython = "^3.1"
 
 [tool.poetry.dev-dependencies]
 

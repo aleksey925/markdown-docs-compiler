@@ -111,6 +111,7 @@ md_extensions = [
     'pymdownx.superfences',
     'pymdownx.highlight',
     'tables',
+    'md_in_html',
 ]
 md_extension_configs = {
     'pymdownx.highlight': {
