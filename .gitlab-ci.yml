@@ -1,0 +1,36 @@
+image: python:3.7-alpine
+
+stages:
+  - test
+  - build
+
+variables:
+  MODE: "prod"
+  POETRY_VERSION: 1.0.5
+
+run_test:
+  stage: test
+  only:
+    - master
+    - develop
+    - merge_request
+  except:
+    changes:
+      - README.md
+  script:
+    - ln -s /root/.poetry/bin/poetry /usr/bin/poetry
+    - wget https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py
+    - python3 ./get-poetry.py --version $POETRY_VERSION
+    - poetry config virtualenvs.create false
+    - poetry install
+    - pytest
+
+build_docker_image:
+  stage: build
+  only:
+    - master
+    - develop
+  before_script:
+    - apk add curl
+  script:
+    - curl --request POST --url ${TRIGGER_BUILD_IMAGE_URL}
