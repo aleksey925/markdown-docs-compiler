@@ -6,7 +6,10 @@ from os.path import join
 import markdown
 from jinja2 import Template
 
-from config import MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIGS
+from config import get_config
+
+
+conf = get_config()
 
 
 def convert_md_to_html(markdown_text: str) -> str:
@@ -17,8 +20,8 @@ def convert_md_to_html(markdown_text: str) -> str:
     """
     html = markdown.markdown(
         markdown_text,
-        extensions=MARKDOWN_EXTENSIONS,
-        extension_configs=MARKDOWN_EXTENSION_CONFIGS
+        extensions=conf.MARKDOWN_EXTENSIONS,
+        extension_configs=conf.MARKDOWN_EXTENSION_CONFIGS
     )
     return re.sub(
         '(<a href=\".*\.)(md)((#.*)?\">)',
