@@ -1,0 +1,53 @@
+<h1>Оглавление</h1>
+<ol>
+<li>Программирование<ul>
+<li><a href="clean-code/clean-code-index.html">Чистый код</a></li>
+<li><a href="computer-science/computer-science-index.html">Computer Science</a></li>
+</ul>
+</li>
+</ol>
+<h1>Таблица</h1>
+<table>
+<thead>
+<tr>
+<th>Column1</th>
+<th>Column2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>val1</td>
+<td>val3, val4</td>
+</tr>
+<tr>
+<td>val2</td>
+<td>val5</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="#Реализация-dict-в-CPython">Реализация dict в CPython</a></li>
+</ul>
+<p><a name='Реализация-dict-в-CPython'></a></p>
+<h4>dict в CPython</h4>
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>typedef struct {
+    Py_hash_t me_hash;
+    PyObject *me_key;
+    PyObject *me_value;
+} PyDictKeyEntry;
+</code></pre></div>
+
+<div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%"><span></span><code>entries <span style="color: #666666">=</span> [[<span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>],
+           [<span style="color: #666666">-</span><span style="color: #40a070">8522787127447073495</span>, <span style="color: #4070a0">&#39;barry&#39;</span>, <span style="color: #4070a0">&#39;green&#39;</span>],
+           [<span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>],
+           [<span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>],
+           [<span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>],
+           [<span style="color: #666666">-</span><span style="color: #40a070">9092791511155847987</span>, <span style="color: #4070a0">&#39;timmy&#39;</span>, <span style="color: #4070a0">&#39;red&#39;</span>],
+           [<span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>, <span style="color: #4070a0">&#39;--&#39;</span>],
+           [<span style="color: #666666">-</span><span style="color: #40a070">6480567542315338377</span>, <span style="color: #4070a0">&#39;guido&#39;</span>, <span style="color: #4070a0">&#39;blue&#39;</span>]]
+</code></pre></div>
+
+<details>
+    <summary>Show slides</summary>
+<img alt="" src="python-notes-index/dict/impl-dict-in-cpython/add-new-element-1.jpg" />
+<img alt="" src="python-notes-index/dict/impl-dict-in-cpython/add-new-element-2.jpg" /></details>

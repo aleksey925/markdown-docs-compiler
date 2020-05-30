@@ -51,3 +51,23 @@ STATIC_FILE_PREFIX_PATH = get_static_file_prefix_path(
 )
 KNOWLEDGE_BASE_REPO_URL = 'git@gitlab.com:alex925/knowledge-base.git'
 RESULT_KNOWLEDGE_BASE_DIR = create_dir(RESULT_ROOT_DIR, 'knowledge_base')
+
+
+# MARKDOWN
+
+MARKDOWN_EXTENSIONS = [
+    'pymdownx.superfences',
+    # Включает подстветку кода
+    'pymdownx.highlight',
+    # Включает поддержку таблиц
+    'tables',
+    # Позволяет размещать markdown разметку внутри html тегов
+    'md_in_html',
+]
+MARKDOWN_EXTENSION_CONFIGS = {
+    'pymdownx.highlight': {
+        'use_pygments': True,
+        'noclasses': True,
+        'pygments_style': 'friendly',
+    },
+}
