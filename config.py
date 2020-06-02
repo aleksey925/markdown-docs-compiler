@@ -9,9 +9,11 @@ class BaseConfig:
         self.IS_CI = True if os.environ.get('CI') == 'true' else False
         self.CI_PROJECT_PATH = os.environ.get('CI_PROJECT_PATH')
 
-        self.BASE_DIR = abspath(dirname(__file__))
+        self.BASE_DIR = os.environ.get('BASE_DIR', abspath(dirname(__file__)))
         self.RESULT_DIR = os.environ.get('RESULT_DIR', 'result_dir')
-        self.RESULT_ROOT_DIR = self.create_dir(self.BASE_DIR, self.RESULT_DIR)
+        self.RESULT_ROOT_DIR = self.create_dir(
+            join(self.BASE_DIR, self.RESULT_DIR)
+        )
 
         self.BASE_KNOWLEDGE_BASE_TEMPLATE = 'knowledge-base.html'
         self.JINJA_TEMPLATE_DIR = join(self.BASE_DIR, 'templates')
@@ -26,7 +28,7 @@ class BaseConfig:
             'git@gitlab.com:alex925/knowledge-base.git'
         )
         self.RESULT_KNOWLEDGE_BASE_DIR = self.create_dir(
-            self.RESULT_ROOT_DIR, 'knowledge_base'
+            join(self.RESULT_ROOT_DIR, 'knowledge_base')
         )
 
         # MARKDOWN
@@ -47,19 +49,18 @@ class BaseConfig:
             },
         }
 
-    def create_dir(self, base_dir: str, target: str) -> str:
-        path = join(base_dir, target)
+    def create_dir(self, path) -> str:
         if not exists(path):
             os.makedirs(path, exist_ok=True)
         return path
 
     def get_or_create_source_dir(self, base_dir: str, is_ci: bool) -> str:
+        source_dir = join(base_dir, 'source')
         if is_ci:
-            source_dir = join(base_dir, 'source')
             root_clone_knowledge_base = join('/builds', self.CI_PROJECT_PATH)
             os.symlink(root_clone_knowledge_base, source_dir)
         else:
-            source_dir = self.create_dir(base_dir, 'source')
+            self.create_dir(source_dir)
 
         return source_dir
 

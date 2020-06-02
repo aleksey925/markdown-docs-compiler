@@ -18,4 +18,4 @@ COPY pyproject.toml poetry.lock ${BASE_DIR}/
 WORKDIR ${BASE_DIR}/
 RUN /bin/sh -c 'poetry install $(test "$MODE" == prod && echo "--no-dev") --no-interaction --no-ansi'
 
-COPY . /opt/app/
+COPY . ${BASE_DIR}/
