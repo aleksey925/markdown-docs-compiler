@@ -21,7 +21,7 @@ def main():
         try:
             pull_repo(conf.KNOWLEDGE_BASE_REPO_URL, conf.SOURCE_DIR)
         except Exception:
-            print('Возникла ошибка во время извлечения реппозитрия')
+            print('Возникла ошибка во время извлечения репозитория')
             exit(1)
 
     clear_dir(conf.RESULT_ROOT_DIR)

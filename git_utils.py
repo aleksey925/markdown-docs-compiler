@@ -14,14 +14,14 @@ class GitProgress(git.remote.RemoteProgress):
 
 def pull_repo(repo_url, source_dir: str, pull_error: bool = False):
     if exists(source_dir) and len(os.listdir(source_dir)) == 0:
-        print('Клонирование реппозитория:')
+        print('Клонирование репозитория:')
         git.Repo.clone_from(repo_url, source_dir, progress=GitProgress())
         print()
     elif pull_error is True:
         exit(1)
     else:
         try:
-            print('Извлекаем изменения из реппозитория:')
+            print('Извлекаем изменения из репозитория:')
             git_repo = git.Repo(source_dir)
             git_repo.remotes.origin.pull(progress=GitProgress())
             print()

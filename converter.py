@@ -14,9 +14,9 @@ conf = get_config()
 
 def convert_md_to_html(markdown_text: str) -> str:
     """
-    Конвертирует markdown строку в html
-    :param markdown_text: строка содержащая markdown разметку
-    :return: конвертированная строка
+    Конвертирует markdown строку в html.
+    :param markdown_text: строка содержащая markdown разметку.
+    :return: конвертированная строка.
     """
     html = markdown.markdown(
         markdown_text,
@@ -36,10 +36,8 @@ def convert_md_files_to_html(target_path: str, template: Template):
     Функция выполняющая рекурсивную конвертацию всех markdown файлов
     расположенных в target_path. Кроме конвертации, так выполняется исправление
     ссылок на файлы (меняется расширение у файла с md на html).
-    :param target_path: путь к папке в которой расположены markdown файлы,
-    которые необходимо конвертировать
-    :param template: jinja2 шаблон внутрь которого будут вставлен результат
-    конвертации
+    :param target_path: путь к папке с markdown файлами, которые необходимо конвертировать.
+    :param template: jinja2 шаблон внутрь которого будут вставлен результат конвертации.
     """
     for root, dirs, files in os.walk(target_path):
         for source_file in filter(lambda i: i.endswith('.md'), files):

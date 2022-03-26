@@ -17,8 +17,8 @@ class CopyTreeRootFilter:
 
 def clear_dir(path: str):
     """
-    Выполняет рекурсивное удаление всего содержимого дирректории
-    :param path: путь к папке
+    Выполняет рекурсивное удаление всего содержимого директории.
+    :param path: путь до очищаемой директории.
     """
     for i in os.listdir(path):
         cur = join(path, i)

@@ -1,9 +1,9 @@
-FROM python:3.7.4-alpine
+FROM amd64/python:3.10-alpine
 
 ARG MODE=${MODE}
 ENV BASE_DIR=/opt/app \
     RESULT_DIR=result_dir \
-    POETRY_VERSION=1.0.5
+    POETRY_VERSION=1.1.13
 ENV RESULT_ROOT_DIR=${BASE_DIR}/${RESULT_DIR}
 
 RUN apk add git

@@ -1,3 +1,5 @@
+# Конвертирует уже ранее извлеченную базу знаний в html и заливает ее в github репозиторий, где включена функция pages.
+# Предназначен для использования внутри GitLab CI pipeline.
 python3 $BASE_DIR/generator.py
 cd $RESULT_ROOT_DIR
 git config --global user.email "ci@ci.com"
