@@ -6,7 +6,7 @@
 
 # Таблица
 
-Column1 |   Column2 
+Column1 |   Column2
 --------|-------------
 val1    | val3, val4
 val2    | val5
@@ -23,7 +23,7 @@ typedef struct {
     PyObject *me_key;
     PyObject *me_value;
 } PyDictKeyEntry;
-```  
+```
 
 ```python
 entries = [['--', '--', '--'],
@@ -38,7 +38,7 @@ entries = [['--', '--', '--'],
 
 <details markdown="span">
     <summary>Show slides</summary>
-    
+
 ![](python-notes-index/dict/impl-dict-in-cpython/add-new-element-1.jpg)
 ![](python-notes-index/dict/impl-dict-in-cpython/add-new-element-2.jpg)
 

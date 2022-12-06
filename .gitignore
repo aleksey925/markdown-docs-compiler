@@ -43,9 +43,7 @@ fabric.properties
 [Ll]ib
 [Ll]ib64
 [Ll]ocal
-[Ss]cripts
 pyvenv.cfg
-.venv
 pip-selfcheck.json
 
 ### Linux template
@@ -218,6 +216,7 @@ celerybeat-schedule
 
 # Environments
 .env
+.envrc
 .venv
 env/
 venv/
@@ -245,5 +244,6 @@ dmypy.json
 .pyre/
 
 ### Project
-source
-result_dir
+/source
+/output
+/build-deps

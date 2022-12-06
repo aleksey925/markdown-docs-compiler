@@ -1,21 +1,27 @@
-FROM amd64/python:3.10-alpine
+FROM python:3.10-slim-buster
 
-ARG MODE=${MODE}
-ENV BASE_DIR=/opt/app \
-    RESULT_DIR=result_dir \
-    POETRY_VERSION=1.1.13
-ENV RESULT_ROOT_DIR=${BASE_DIR}/${RESULT_DIR}
+ENV POETRY_VERSION=1.2.2
 
-RUN apk add git
+WORKDIR /opt/app/
 
-RUN ln -s /root/.poetry/bin/poetry /usr/bin/poetry && \
-    wget https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py && \
-    python3 ./get-poetry.py --version $POETRY_VERSION && \
-    poetry config virtualenvs.create false && \
-    rm ./get-poetry.py
+RUN apt update \
+    && apt upgrade -y \
+    && apt install -y curl \
+    && ln -s /root/.local/bin/poetry /usr/bin/poetry \
+    && curl -sSL https://install.python-poetry.org | POETRY_VERSION=$POETRY_VERSION python3 - \
+    && poetry config virtualenvs.create false \
+    && apt purge -y curl \
+    && apt autoremove -y \
+    && apt autoclean -y \
+    && rm -fr /var/lib/apt/lists /var/lib/cache/* /var/log/*
 
-COPY pyproject.toml poetry.lock ${BASE_DIR}/
-WORKDIR ${BASE_DIR}/
-RUN /bin/sh -c 'poetry install $(test "$MODE" == prod && echo "--no-dev") --no-interaction --no-ansi'
+COPY pyproject.toml poetry.lock /opt/app/
+RUN poetry install --no-root --no-interaction --no-ansi --only main \
+    && rm -rf /root/.cache/pip /root/.cache/pypoetry/
 
-COPY . ${BASE_DIR}/
+COPY src/ /opt/app/src
+
+RUN poetry install --no-interaction --no-ansi --only main \
+    && rm -rf /root/.cache/pip /root/.cache/pypoetry/
+
+ENTRYPOINT ["markdown-docs-compiler"]
