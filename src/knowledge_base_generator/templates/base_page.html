@@ -5,12 +5,12 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ STATIC_FILE_PREFIX_PATH }}static/css/knowledge-base.css">
+    <link rel="stylesheet" href="{{ SITE_ROOT_PREFIX }}static/css/knowledge-base.css">
 {% endblock %}
 
 {% block navbar %}
-    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
-    <li class="active"><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>
+    <li><a href="{{ SITE_ROOT_PREFIX }}index.html">Главная</a></li>
+    <li class="active"><a href="{{ SITE_ROOT_PREFIX }}{{ CONTENT_DIR_NAME }}/index.html">База знаний</a></li>
 {% endblock %}
 
 {% block container %}

@@ -43,9 +43,7 @@ fabric.properties
 [Ll]ib
 [Ll]ib64
 [Ll]ocal
-[Ss]cripts
 pyvenv.cfg
-.venv
 pip-selfcheck.json
 
 ### Linux template
@@ -246,4 +244,4 @@ dmypy.json
 
 ### Project
 source
-result_dir
+output

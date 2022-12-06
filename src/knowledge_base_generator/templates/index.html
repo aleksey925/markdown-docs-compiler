@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block navbar %}
-    <li class="active"><a href="{{ STATIC_FILE_PREFIX_PATH }}index.html">Главная</a></li>
-    <li><a href="{{ STATIC_FILE_PREFIX_PATH }}knowledge_base/index.html">База знаний</a></li>
+    <li class="active"><a href="{{ SITE_ROOT_PREFIX }}index.html">Главная</a></li>
+    <li><a href="{{ SITE_ROOT_PREFIX }}{{ CONTENT_DIR_NAME }}/index.html">База знаний</a></li>
 {% endblock %}
 
 {% block container %}
@@ -16,7 +16,7 @@
             <div class="jumbotron">
                 <div class="row">
                     <div class="col-sm-4">
-                        <img src="{{ STATIC_FILE_PREFIX_PATH }}static/images/avatar.png" width="100%">
+                        <img src="{{ SITE_ROOT_PREFIX }}static/images/avatar.png" width="100%">
                     </div>
                     <div class="col-sm-8">
                         <h1>Привет всем!</h1>
@@ -39,22 +39,22 @@
                 <div class="col-sm-12 text-center" id="contact-block">
                     <h2>Контакты</h2>
                     <a href="mailto:petrunnik.a@mail.ru">
-                        <img class="contact-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/email.png">
+                        <img class="contact-img" src="{{ SITE_ROOT_PREFIX }}static/images/email.png">
                     </a>
                     <a href="skype:alex85244">
-                        <img class="contact-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/skype.png">
+                        <img class="contact-img" src="{{ SITE_ROOT_PREFIX }}static/images/skype.png">
                     </a>
                     <a href="https://www.linkedin.com/in/aleksey-petrunnik-5313a9126/">
-                        <img class="contact-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/linkedin.png">
+                        <img class="contact-img" src="{{ SITE_ROOT_PREFIX }}static/images/linkedin.png">
                     </a>
                     <a href="https://github.com/aleksey925/">
-                        <img class="contact-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/github.png">
+                        <img class="contact-img" src="{{ SITE_ROOT_PREFIX }}static/images/github.png">
                     </a>
                     <a href="https://bitbucket.org/alex925/">
-                        <img class="bitbiucket-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/bitbucket.png">
+                        <img class="bitbiucket-img" src="{{ SITE_ROOT_PREFIX }}static/images/bitbucket.png">
                     </a>
                     <a href="https://gitlab.com/alex925/">
-                        <img class="contact-img" src="{{ STATIC_FILE_PREFIX_PATH }}static/images/gitlab.png">
+                        <img class="contact-img" src="{{ SITE_ROOT_PREFIX }}static/images/gitlab.png">
                     </a>
                 </div>
             </div>
