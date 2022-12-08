@@ -21,7 +21,7 @@ class BaseConfig:
 
         self.SOURCE_DIR = self.get_or_create_source_dir(self.BASE_DIR, self.IS_CI)
         self.SOURCE_DIR_IGNORE = (
-            '.git', '.gitignore', '.gitlab-ci.yml', '.dockerignore'
+            '.git', '.gitignore', '.gitlab-ci.yml', '.dockerignore', '.build-deps'
         )
 
         self.KNOWLEDGE_BASE_REPO_URL = (
