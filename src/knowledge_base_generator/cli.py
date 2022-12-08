@@ -34,12 +34,34 @@ def cli() -> None:
     callback=make_option_preprocessor(mkdir, empty_dir),
     help='Directory where the converted files will be placed',
 )
+@click.option(
+    '--template-dir',
+    required=True,
+    type=Path,
+    callback=make_option_preprocessor(path_exists, is_dir),
+    help='Directory jinja templates',
+)
+@click.option(
+    '--static-dir',
+    required=True,
+    type=Path,
+    callback=make_option_preprocessor(path_exists, is_dir),
+    help='Directory with static files',
+)
 @click.option('--site-root-prefix', type=str, default=None)
-def build(source_dir: Path, output_dir: Path, site_root_prefix: str | None) -> None:
+def build(
+        source_dir: Path,
+        output_dir: Path,
+        template_dir: Path,
+        static_dir: Path,
+        site_root_prefix: str | None
+) -> None:
     build_site(
         config=get_config(),
         source_dir=source_dir,
         output_dir=output_dir,
+        template_dir=template_dir,
+        static_dir=static_dir,
         site_root_prefix=site_root_prefix
     )
 

@@ -6,14 +6,12 @@ from pydantic.env_settings import BaseSettings
 class Config(BaseSettings):
     app_dir: Path = Path(__file__).absolute().parent
 
-    template_dir = app_dir / 'templates'
     index_template = 'index.html'
     base_page_template = 'base_page.html'
-    static_dir = app_dir / 'static'
     content_dir_name = 'content'
 
     source_dir_ignore = (
-        '.git', '.github', '.gitignore', '.gitlab-ci.yml', '.dockerignore'
+        '.git', '.github', '.gitignore', '.gitlab-ci.yml', '.dockerignore', '.build-deps',
     )
 
     # markdown settings
