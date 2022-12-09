@@ -16,8 +16,12 @@ RUN apt update \
     && rm -fr /var/lib/apt/lists /var/lib/cache/* /var/log/*
 
 COPY pyproject.toml poetry.lock /opt/app/
+RUN poetry install --no-root --no-interaction --no-ansi --only main \
+    && rm -rf /root/.cache/pip /root/.cache/pypoetry/
+
 COPY src/ /opt/app/src
 
-RUN poetry install --only main --no-interaction --no-ansi
+RUN poetry install --no-interaction --no-ansi --only main \
+    && rm -rf /root/.cache/pip /root/.cache/pypoetry/
 
 ENTRYPOINT ["markdown-docs-compiler"]
