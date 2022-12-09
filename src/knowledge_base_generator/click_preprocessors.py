@@ -1,10 +1,16 @@
-import click
 import typing as t
 from pathlib import Path
 
+import click
+from click.core import Context, Option
 
-def make_option_preprocessor(*preprocessors: t.Callable):
-    def inner(ctx, param, value):
+T = t.TypeVar('T')
+
+
+def make_option_preprocessor(
+    *preprocessors: t.Callable[[T], T]
+) -> t.Callable[[t.Any, t.Any, T], T]:
+    def inner(ctx: Context, param: Option, value: T) -> T:
         for func in preprocessors:
             try:
                 value = func(value)

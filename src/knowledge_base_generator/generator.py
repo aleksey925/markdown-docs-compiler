@@ -9,14 +9,14 @@ from knowledge_base_generator.file_utils import CopyTreeRootFilter, add_closing_
 
 
 def build_site(
-        *,
-        config: Config,
-        source_dir: Path,
-        output_dir: Path,
-        template_dir: Path,
-        static_dir: Path,
-        site_root_prefix: str | None = None
-):
+    *,
+    config: Config,
+    source_dir: Path,
+    output_dir: Path,
+    template_dir: Path,
+    static_dir: Path,
+    site_root_prefix: str | None = None,
+) -> None:
     source_dir = source_dir.absolute()
     output_dir = output_dir.absolute()
     site_root_prefix = add_closing_slash(site_root_prefix or f'{output_dir}/')
@@ -32,7 +32,7 @@ def build_site(
     shutil.copytree(
         src=source_dir,
         dst=path_to_target_files,
-        ignore=CopyTreeRootFilter(config.source_dir_ignore)
+        ignore=CopyTreeRootFilter(config.source_dir_ignore),
     )
     convert_md_files_to_html(
         target_path=path_to_target_files,

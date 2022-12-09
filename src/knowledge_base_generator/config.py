@@ -11,7 +11,12 @@ class Config(BaseSettings):
     content_dir_name = 'content'
 
     source_dir_ignore = (
-        '.git', '.github', '.gitignore', '.gitlab-ci.yml', '.dockerignore', '.build-deps',
+        '.git',
+        '.github',
+        '.gitignore',
+        '.gitlab-ci.yml',
+        '.dockerignore',
+        '.build-deps',
     )
 
     # markdown settings

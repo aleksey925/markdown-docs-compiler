@@ -2,16 +2,16 @@ from pathlib import Path
 
 import click
 
-from knowledge_base_generator.config import get_config
-from knowledge_base_generator.generator import build_site
 from knowledge_base_generator.click_preprocessors import (
-    path_exists,
+    empty_dir,
     is_dir,
     make_option_preprocessor,
-    not_empty_dir,
-    empty_dir,
     mkdir,
+    not_empty_dir,
+    path_exists,
 )
+from knowledge_base_generator.config import get_config
+from knowledge_base_generator.generator import build_site
 
 
 @click.group()
@@ -50,11 +50,11 @@ def cli() -> None:
 )
 @click.option('--site-root-prefix', type=str, default=None)
 def build(
-        source_dir: Path,
-        output_dir: Path,
-        template_dir: Path,
-        static_dir: Path,
-        site_root_prefix: str | None
+    source_dir: Path,
+    output_dir: Path,
+    template_dir: Path,
+    static_dir: Path,
+    site_root_prefix: str | None,
 ) -> None:
     build_site(
         config=get_config(),
@@ -62,7 +62,7 @@ def build(
         output_dir=output_dir,
         template_dir=template_dir,
         static_dir=static_dir,
-        site_root_prefix=site_root_prefix
+        site_root_prefix=site_root_prefix,
     )
 
 
