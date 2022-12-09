@@ -15,10 +15,13 @@ def convert_md_to_html(
     """
     It converts markdown to html.
     """
-    html = markdown.markdown(
-        markdown_text,
-        extensions=extensions,
-        extension_configs=extension_configs,
+    html = (
+        markdown.markdown(
+            markdown_text,
+            extensions=extensions,
+            extension_configs=extension_configs,
+        )
+        + '\n'
     )
     return re.sub(
         '(<a href=\".*\.)(md)((#.*)?\">)',  # noqa: W605

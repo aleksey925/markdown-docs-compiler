@@ -8,7 +8,7 @@ from knowledge_base_generator.converter import convert_md_files_to_html
 from knowledge_base_generator.file_utils import CopyTreeRootFilter, add_closing_slash
 
 
-def build_site(
+def compile_site(
     *,
     config: Config,
     source_dir: Path,
@@ -32,7 +32,7 @@ def build_site(
     shutil.copytree(
         src=source_dir,
         dst=path_to_target_files,
-        ignore=CopyTreeRootFilter(config.source_dir_ignore),
+        ignore=CopyTreeRootFilter(config.source_ignore),
     )
     convert_md_files_to_html(
         target_path=path_to_target_files,

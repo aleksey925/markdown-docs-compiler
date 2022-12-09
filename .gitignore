@@ -244,5 +244,6 @@ dmypy.json
 .pyre/
 
 ### Project
-source
-output
+/source
+/output
+/build-deps

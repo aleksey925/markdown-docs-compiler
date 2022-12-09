@@ -11,7 +11,7 @@ from knowledge_base_generator.click_preprocessors import (
     path_exists,
 )
 from knowledge_base_generator.config import get_config
-from knowledge_base_generator.generator import build_site
+from knowledge_base_generator.main import compile_site
 
 
 @click.group()
@@ -19,7 +19,7 @@ def cli() -> None:
     pass
 
 
-@cli.command()
+@cli.command(name='compile')
 @click.option(
     '--source-dir',
     required=True,
@@ -49,14 +49,14 @@ def cli() -> None:
     help='Directory with static files',
 )
 @click.option('--site-root-prefix', type=str, default=None)
-def build(
+def compile_(
     source_dir: Path,
     output_dir: Path,
     template_dir: Path,
     static_dir: Path,
     site_root_prefix: str | None,
 ) -> None:
-    build_site(
+    compile_site(
         config=get_config(),
         source_dir=source_dir,
         output_dir=output_dir,

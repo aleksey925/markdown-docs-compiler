@@ -1,23 +1,17 @@
 from pathlib import Path
 
 from pydantic.env_settings import BaseSettings
+from pydantic.fields import Field
 
 
 class Config(BaseSettings):
     app_dir: Path = Path(__file__).absolute().parent
 
-    index_template = 'index.html'
-    base_page_template = 'base_page.html'
-    content_dir_name = 'content'
+    index_template: str = 'index.html'
+    base_page_template: str = 'base_page.html'
+    content_dir_name: str = 'content'
 
-    source_dir_ignore = (
-        '.git',
-        '.github',
-        '.gitignore',
-        '.gitlab-ci.yml',
-        '.dockerignore',
-        '.build-deps',
-    )
+    source_ignore: list[str] = Field(default_factory=list)
 
     # markdown settings
     markdown_extensions = [
