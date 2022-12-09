@@ -1,0 +1,55 @@
+name: tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - 'master'
+
+env:
+  POETRY_VERSION: "1.2.2"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | POETRY_VERSION=$POETRY_VERSION python3
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install dependencies
+        run: poetry install
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
+      - name: Run lint
+        run: poetry run pre-commit run --all
+
+  test:
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+      - name: Install poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | POETRY_VERSION=$POETRY_VERSION python3
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - name: Install dependencies
+        run: poetry install
+        env:
+          POETRY_VIRTUALENVS_CREATE: false
+      - name: Run tests
+        run: poetry run pytest
