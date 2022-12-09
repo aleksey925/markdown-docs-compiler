@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "knowledge-base-generator"
+name = "markdown-docs-compiler"
 version = "0.1.0"
 description = ""
 license = "MIT"
 authors = ["Alexey Petrunnik <petrunnik.a@gmail.com>"]
-packages = [{include = "knowledge_base_generator", from = "src"}]
+packages = [{include = "markdown_docs_compiler", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -29,7 +29,7 @@ isort = "^5.10.1"
 mypy = "=0.991"
 
 [tool.poetry.scripts]
-knowledge-base-generator = "knowledge_base_generator.cli:cli"
+markdown-docs-compiler = "markdown_docs_compiler.cli:cli"
 
 [build-system]
 requires = ["poetry>=1.0"]

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import click
 
-from knowledge_base_generator.click_preprocessors import (
+from markdown_docs_compiler.click_preprocessors import (
     empty_dir,
     is_dir,
     make_option_preprocessor,
@@ -10,8 +10,8 @@ from knowledge_base_generator.click_preprocessors import (
     not_empty_dir,
     path_exists,
 )
-from knowledge_base_generator.config import get_config
-from knowledge_base_generator.main import compile_site
+from markdown_docs_compiler.config import get_config
+from markdown_docs_compiler.main import compile_site
 
 
 @click.group()

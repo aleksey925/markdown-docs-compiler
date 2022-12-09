@@ -3,9 +3,9 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from knowledge_base_generator.config import Config
-from knowledge_base_generator.converter import convert_md_files_to_html
-from knowledge_base_generator.file_utils import CopyTreeRootFilter, add_closing_slash
+from markdown_docs_compiler.config import Config
+from markdown_docs_compiler.converter import convert_md_files_to_html
+from markdown_docs_compiler.file_utils import CopyTreeRootFilter, add_closing_slash
 
 
 def compile_site(

@@ -20,4 +20,4 @@ COPY src/ /opt/app/src
 
 RUN poetry install --only main --no-interaction --no-ansi
 
-ENTRYPOINT ["knowledge-base-generator"]
+ENTRYPOINT ["markdown-docs-compiler"]

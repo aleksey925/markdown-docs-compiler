@@ -1,5 +1,5 @@
-from knowledge_base_generator.config import Config
-from knowledge_base_generator.converter import convert_md_to_html
+from markdown_docs_compiler.config import Config
+from markdown_docs_compiler.converter import convert_md_to_html
 
 
 def test_convert_md_to_html__send_valid_markdown__return_valid_html(shared_datadir):
