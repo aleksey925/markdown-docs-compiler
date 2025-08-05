@@ -5,6 +5,7 @@ ENV POETRY_VERSION=2.1.4
 WORKDIR /opt/app/
 
 RUN pip install poetry==$POETRY_VERSION \
+    && poetry self add poetry-plugin-export \
     && poetry config virtualenvs.create false
 
 COPY pyproject.toml poetry.lock /opt/app/
