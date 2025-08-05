@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any, ClassVar
 
 from pydantic.env_settings import BaseSettings
 from pydantic.fields import Field
@@ -14,7 +15,7 @@ class Config(BaseSettings):
     source_ignore: list[str] = Field(default_factory=list)
 
     # markdown settings
-    markdown_extensions = [
+    markdown_extensions: ClassVar[list[str]] = [
         'pymdownx.superfences',
         # It enables code highlight
         'pymdownx.highlight',
@@ -23,7 +24,7 @@ class Config(BaseSettings):
         # It enables support markdown markup inside html tags
         'md_in_html',
     ]
-    markdown_extension_configs = {
+    markdown_extension_configs: ClassVar[dict[str, Any]] = {
         'pymdownx.highlight': {
             'use_pygments': True,
             'noclasses': True,

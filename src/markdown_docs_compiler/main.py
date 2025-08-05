@@ -21,7 +21,7 @@ def compile_site(
     output_dir = output_dir.absolute()
     site_root_prefix = add_closing_slash(site_root_prefix or f'{output_dir}/')
 
-    jinja_env = Environment(loader=FileSystemLoader(template_dir))
+    jinja_env = Environment(loader=FileSystemLoader(template_dir), autoescape=True)
     jinja_env.globals['SITE_ROOT_PREFIX'] = site_root_prefix
     jinja_env.globals['CONTENT_DIR_NAME'] = config.content_dir_name
 

@@ -8,7 +8,7 @@ T = t.TypeVar('T')
 
 
 def make_option_preprocessor(
-    *preprocessors: t.Callable[[T], T]
+    *preprocessors: t.Callable[[T], T],
 ) -> t.Callable[[t.Any, t.Any, T], T]:
     def inner(ctx: Context, param: Option, value: T) -> T:
         for func in preprocessors:

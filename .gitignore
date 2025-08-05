@@ -216,6 +216,7 @@ celerybeat-schedule
 
 # Environments
 .env
+.env.sh
 .envrc
 .venv
 env/
