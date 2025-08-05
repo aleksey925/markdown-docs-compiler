@@ -7,47 +7,68 @@ authors = ["Alexey Petrunnik <petrunnik.a@gmail.com>"]
 packages = [{include = "markdown_docs_compiler", from = "src"}]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-markdown = "^3.3"
-types-markdown = "^3.4.2.1"
-pygments = "^2.11"
-pymdown-extensions = "^9.3"
-jinja2 = "^2.11"
-types-jinja2 = "^2.11.9"
-markupsafe = "=2.0.1"  # it pinned for correct work jinja2
-click = "^8.1.3"
+python = "^3.13"
+click = "^8.2.1"
+jinja2 = "^3.1"
+markdown = "^3.8"
+markupsafe = "^3.0"
 pydantic = {version = "^1.10.2", extras = ["dotenv"]}
+pygments = "^2.19"
+pymdown-extensions = "^10.16"
+types-jinja2 = "^2.11.9"
+types-markdown = "^3.8"
 
-[tool.poetry.dev-dependencies]
-pytest = "=7.1.1"
-pytest-datadir = "=1.3.1"
-pre-commit = "^2.20.0"
-autopep8 = "^1.6.0"
-black = "^22.12.0"
-flake8 = "^4.0.1"
-isort = "^5.10.1"
-mypy = "=0.991"
+[tool.poetry.group.dev.dependencies]
+mypy = "=1.17.1"
+pre-commit = "^4.2.0"
+pytest = "8.4.1"
+pytest-datadir = "=1.8.0"
+ruff = "^0.12.7"
+
+[tool.poetry.requires-plugins]
+poetry-plugin-export = ">=1.9"
 
 [tool.poetry.scripts]
 markdown-docs-compiler = "markdown_docs_compiler.cli:cli"
 
 [build-system]
-requires = ["poetry>=1.0"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
 
 [tool.pytest.ini_options]
 pythonpath = ['./src']
 testpaths = ["tests"]
 
-[tool.black]
-target_version = ['py310']
+[tool.ruff]
+target-version = "py311"
 line-length = 100
-skip_string_normalization = true
 
-[tool.isort]
-profile = "black"
+[tool.ruff.format]
+quote-style = "single"
+
+[tool.ruff.lint]
+select = [
+    "A",    # flake8-builtins
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "N",    # pep8-naming
+    "T20",  # flake8-print
+    "C90",  # flake8-complexity (mccabe)
+    "UP",   # pyupgrade
+    "RUF",  # ruff
+    "S",    # flake8-bandit
+]
+ignore = [
+    "A003",  # class attribute {name} is shadowing a python builtin
+    "S101",  # use of assert detected
+]
 
 [tool.mypy]
-python_version = "3.10"
-disallow_any_generics = true
-disallow_untyped_defs = true
+python_version = "3.13"
+plugins = ["pydantic.mypy"]
+strict = true
+exclude = "tests"
+show_error_codes = true
+no_implicit_optional = false

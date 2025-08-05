@@ -1,6 +1,6 @@
-FROM python:3.10-slim-buster
+FROM python:3.13-slim-bookworm
 
-ENV POETRY_VERSION=1.2.2
+ENV POETRY_VERSION=2.1.4
 
 WORKDIR /opt/app/
 
@@ -13,7 +13,7 @@ RUN poetry export --only=main --without-hashes -o requirements.txt \
     && poetry export --only=dev --without-hashes -o requirements-dev.txt
 
 #########################################################################
-FROM python:3.10-slim-buster
+FROM python:3.13-slim-bookworm
 
 WORKDIR /opt/app/
 

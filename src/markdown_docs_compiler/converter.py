@@ -24,7 +24,7 @@ def convert_md_to_html(
         + '\n'
     )
     return re.sub(
-        '(<a href=\".*\.)(md)((#.*)?\">)',  # noqa: W605
+        r'(<a href=".*\.)(md)((#.*)?">)',
         r'\g<1>html\g<3>',
         html,
         flags=re.UNICODE | re.MULTILINE,
