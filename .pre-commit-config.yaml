@@ -18,6 +18,6 @@ repos:
       - id: mypy
         name: mypy
         language: system
-        entry: poetry run mypy --show-error-codes
+        entry: uv run mypy --show-error-codes
         types: [python]
         exclude: tests

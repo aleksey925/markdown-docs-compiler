@@ -1,46 +1,53 @@
-[tool.poetry]
+[project]
 name = "markdown-docs-compiler"
 version = "0.1.0"
 description = "A simple utility for creating a static site from markdown files"
+authors = [{ name = "Alexey Petrunnik", email = "petrunnik.a@gmail.com" }]
+requires-python = ">=3.13, <4"
 license = "MIT"
-authors = ["Alexey Petrunnik <petrunnik.a@gmail.com>"]
-packages = [{include = "markdown_docs_compiler", from = "src"}]
+dependencies = [
+    "click>=8.2.1,<9",
+    "jinja2~=3.1",
+    "markdown~=3.8",
+    "markupsafe~=3.0",
+    "pydantic[dotenv]>=1.10.2,<2",
+    "pygments~=2.19",
+    "pymdown-extensions~=10.16",
+    "types-jinja2>=2.11.9,<3",
+    "types-markdown~=3.8",
+]
 
-[tool.poetry.dependencies]
-python = "^3.13"
-click = "^8.2.1"
-jinja2 = "^3.1"
-markdown = "^3.8"
-markupsafe = "^3.0"
-pydantic = {version = "^1.10.2", extras = ["dotenv"]}
-pygments = "^2.19"
-pymdown-extensions = "^10.16"
-types-jinja2 = "^2.11.9"
-types-markdown = "^3.8"
+[dependency-groups]
+dev = [
+    "mypy==1.17.1",
+    "pre-commit>=4.2.0,<5",
+    "pytest==8.4.1",
+    "pytest-datadir==1.8.0",
+    "ruff>=0.12.7,<0.13",
+]
 
-[tool.poetry.group.dev.dependencies]
-mypy = "=1.17.1"
-pre-commit = "^4.2.0"
-pytest = "8.4.1"
-pytest-datadir = "=1.8.0"
-ruff = "^0.12.7"
+[tool.hatch.build.targets.sdist]
+include = ["src/markdown_docs_compiler"]
 
-[tool.poetry.requires-plugins]
-poetry-plugin-export = ">=1.9"
+[tool.hatch.build.targets.wheel]
+include = ["src/markdown_docs_compiler"]
 
-[tool.poetry.scripts]
+[tool.hatch.build.targets.wheel.sources]
+"src/markdown_docs_compiler" = "markdown_docs_compiler"
+
+[project.scripts]
 markdown-docs-compiler = "markdown_docs_compiler.cli:cli"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
 pythonpath = ['./src']
 testpaths = ["tests"]
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py313"
 line-length = 100
 
 [tool.ruff.format]
@@ -72,3 +79,7 @@ strict = true
 exclude = "tests"
 show_error_codes = true
 no_implicit_optional = false
+
+[[tool.mypy.overrides]]
+module = ["pymdownx.*"]
+ignore_missing_imports = true

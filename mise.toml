@@ -1,7 +1,9 @@
-[env]
-_.source = ".env.sh"
+[[env]]
 _.python.venv = { path = "{{ get_env(name='VENV_DIR_PATH', default='.venv') }}", create = true }
 
+[[env]]
+_.source = { path = ".env.sh", tools=true }
+
 [tools]
-poetry = "2.1.4"
 python = "3.13.5"
+uv = "0.9.9"

@@ -1,4 +1,4 @@
-<h1>Оглавление</h1>
+<h1 id="оглавление">Оглавление</h1>
 <ol>
 <li>Программирование<ul>
 <li><a href="clean-code/clean-code-index.html">Чистый код</a></li>
@@ -6,7 +6,7 @@
 </ul>
 </li>
 </ol>
-<h1>Таблица</h1>
+<h1 id="таблица">Таблица</h1>
 <table>
 <thead>
 <tr>
@@ -28,8 +28,20 @@
 <ul>
 <li><a href="#Реализация-dict-в-CPython">Реализация dict в CPython</a></li>
 </ul>
+<p><strong>Заголовок списка</strong></p>
+<ul>
+<li>пункт 1</li>
+<li>пункт 2</li>
+<li>пункт 3</li>
+</ul>
+<p><strong>Заголовок списка 2</strong></p>
+<ul>
+<li>пункт 1</li>
+<li>пункт 2</li>
+<li>пункт 3</li>
+</ul>
 <p><a name='Реализация-dict-в-CPython'></a></p>
-<h4>dict в CPython</h4>
+<h4 id="dict-в-cpython">dict в CPython</h4>
 <div class="highlight" style="background: #f0f0f0"><pre style="line-height: 125%;"><span></span><code>typedef struct {
     Py_hash_t me_hash;
     PyObject *me_key;

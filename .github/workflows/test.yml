@@ -8,28 +8,17 @@ on:
     branches:
       - 'master'
 
-env:
-  POETRY_VERSION: "2.1.4"
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.13"
-      - name: Install poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | POETRY_VERSION=$POETRY_VERSION python3
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - uses: actions/checkout@v5
+      - name: Install tools
+        uses: jdx/mise-action@v3
       - name: Install dependencies
-        run: poetry install
-        env:
-          POETRY_VIRTUALENVS_CREATE: false
+        run: uv sync
       - name: Run lint
-        run: poetry run pre-commit run --all
+        run: uv run pre-commit run --all
 
   test:
     permissions:
@@ -38,18 +27,10 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.13"
-      - name: Install poetry
-        run: |
-          curl -sSL https://install.python-poetry.org | POETRY_VERSION=$POETRY_VERSION python3
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+      - uses: actions/checkout@v5
+      - name: Install tools
+        uses: jdx/mise-action@v3
       - name: Install dependencies
-        run: poetry install
-        env:
-          POETRY_VIRTUALENVS_CREATE: false
+        run: uv sync
       - name: Run tests
-        run: poetry run pytest
+        run: uv run pytest

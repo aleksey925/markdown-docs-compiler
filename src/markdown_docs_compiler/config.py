@@ -3,6 +3,7 @@ from typing import Any, ClassVar
 
 from pydantic.env_settings import BaseSettings
 from pydantic.fields import Field
+from pymdownx import slugs
 
 
 class Config(BaseSettings):
@@ -23,12 +24,20 @@ class Config(BaseSettings):
         'tables',
         # It enables support markdown markup inside html tags
         'md_in_html',
+        # It enables lists without preceding blank line (GitHub-style)
+        'markdown_docs_compiler.extensions.breakless_lists',
+        # It enables automatic anchor generation for headings (GitHub-compatible)
+        'toc',
     ]
     markdown_extension_configs: ClassVar[dict[str, Any]] = {
         'pymdownx.highlight': {
             'use_pygments': True,
             'noclasses': True,
             'pygments_style': 'friendly',
+        },
+        'toc': {
+            'slugify': slugs.slugify(case='lower'),
+            'separator': '-',
         },
     }
 
