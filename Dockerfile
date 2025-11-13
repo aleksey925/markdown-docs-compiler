@@ -1,17 +1,15 @@
 FROM python:3.13-slim-bookworm
 
-ENV POETRY_VERSION=2.1.4
+ENV UV_VERSION=0.9.9
 
 WORKDIR /opt/app/
 
-RUN pip install poetry==$POETRY_VERSION \
-    && poetry self add poetry-plugin-export \
-    && poetry config virtualenvs.create false
+RUN pip install uv==${UV_VERSION}
 
-COPY pyproject.toml poetry.lock /opt/app/
+COPY pyproject.toml uv.lock* ./
 
-RUN poetry export --only=main --without-hashes -o requirements.txt \
-    && poetry export --only=dev --without-hashes -o requirements-dev.txt
+RUN uv export -o requirements.txt --no-default-groups --no-hashes --no-annotate --frozen && \
+    uv export -o requirements-dev.txt --group dev --no-hashes --no-annotate --frozen
 
 #########################################################################
 FROM python:3.13-slim-bookworm
