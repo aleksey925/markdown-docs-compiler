@@ -1,10 +1,24 @@
-FROM python:3.13-slim-bookworm
+FROM debian:13-slim AS exporter
 
-ENV UV_VERSION=0.9.9
+RUN apt-get update  \
+    && apt-get -y --no-install-recommends install \
+       sudo curl git ca-certificates build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV MISE_DATA_DIR="/mise"
+ENV MISE_CONFIG_DIR="/mise"
+ENV MISE_CACHE_DIR="/mise/cache"
+ENV MISE_INSTALL_PATH="/usr/local/bin/mise"
+ENV PATH="/mise/shims:$PATH"
+
+COPY mise.toml ./
+
+RUN curl https://mise.run | sh && \
+    mise trust && \
+    mise i
 
 WORKDIR /opt/app/
-
-RUN pip install uv==${UV_VERSION}
 
 COPY pyproject.toml uv.lock* ./
 
